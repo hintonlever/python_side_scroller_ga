@@ -320,9 +320,25 @@ while running:
             alive_count = alive_count + 1
             pilot.score = seconds
             
+            # Calculating input vector, scaled from -1 to 1
+            # 1 = Distance to top of screen
+            input_1 = pilot.rect.top / GAME_HEIGHT * 2 - 1
+            # 2 = Distance to bottom of screen
+            input_2 = (GAME_HEIGHT - pilot.rect.bottom) / GAME_HEIGHT * 2 - 1 
             
+            # 3 = Distance to nearest enemy directly in front (tunnel vision)
+            input_3 = GAME_WIDTH
+            for enemy in enemies:
+                # Is enemy directly in front of pilot
+                if enemy.rect.bottom < pilot.rect.top and enemy.rect.bottom > pilot.rect.bottom:
+                    # how far away is it?
+                    dist = enemy.rect.left - pilot.rect.right
+                    # is this closer than previous?
+                    if dist < input_3:
+                        input_3 = dist
+            input_3 = input_3 / (GAME_WIDTH - pilot.rect.right) * 2 - 1
             
-            pilot.move_player([random.random(),random.random(),random.random()])
+            pilot.move_player([input_1,input_2,input_3])
         # if player.alive == False:
             
  
