@@ -7,6 +7,8 @@ Created on Sun Apr  4 17:44:35 2021
 
 # Helpful websites 
 # https://towardsdatascience.com/everything-you-need-to-know-about-neural-networks-and-backpropagation-machine-learning-made-easy-e5285bc2be3a
+# https://hackernoon.com/building-a-feedforward-neural-network-from-scratch-in-python-d3526457156b
+# https://www.programiz.com/python-programming/matrix
 
 # Requires numpy for matrix calcs
 
@@ -29,13 +31,13 @@ class Neural_Net():
         self.output_nodes_count = output_nodes_count
         
         # Create and randomise weight matrices (includes + 1 for bias vector)
-
-        self.weights_1 = np.random.rand(self.hidden_nodes_count, self.input_nodes_count  + 1) 
-        self.weights_2 = np.random.rand(self.output_nodes_count, self.hidden_nodes_count + 1)
+        # Weights are from -1 to 1
+        self.weights_1 = np.random.rand(self.hidden_nodes_count, self.input_nodes_count  + 1) * 2 - 1 
+        self.weights_2 = np.random.rand(self.output_nodes_count, self.hidden_nodes_count + 1) * 2 - 1
         # self.weights_3 = np.random.rand(self.output_nodes_count, self.hidden_nodes_count)
    
-        self.bias_1 = random.random()
-        self.bias_2 = random.random()
+        self.bias_1 = random.random() * 2 - 1
+        self.bias_2 = random.random() * 2 - 1
         # self.bias_3 = np.random.rand(self.output_nodes_count, self.hidden_nodes_count + 1)
     
     def predict(self, input_vector):
@@ -54,7 +56,6 @@ class Neural_Net():
         out_2 = sigmoid(np.dot(self.weights_2,out_1_w_bias ))
 
         return(out_2)
-    
     
     
 
