@@ -22,6 +22,10 @@ import matplotlib.pyplot as plt
 import matplotlib.backends.backend_agg as agg
 
 
+# My files
+import population
+
+
 fig = plt.figure(figsize=[3, 3])
 ax = fig.add_subplot(111)
 canvas = agg.FigureCanvasAgg(fig)
@@ -237,16 +241,18 @@ pygame.time.set_timer(ADDENEMY, 300)
 # Human player
 human_player = Player()
 
-# AI Players
-total_random_players = 1000
-players = pygame.sprite.Group()
+# Random Players
+# total_random_players = 10
+# players = pygame.sprite.Group()
 
-for i in range(1,total_random_players):
-    player = Random_Player()
-    players.add(player)
+# for i in range(1,total_random_players):
+#     player = Random_Player()
+#     players.add(player)
     
 
-
+# AI Players
+total_pilots = 10
+pilots = Population(total_pilots)
 
 
 score = Score()
@@ -309,27 +315,27 @@ while running:
     # LET THE AI'S PLAY
     alive_count = 0
     final_scores = []
-    for player in players:
-        if player.alive == True:
+    for pilot in pilots:
+        if pilot.alive == True:
             alive_count = alive_count + 1
-            player.score = seconds
-            player.move_player()
+            pilot.score = seconds
+            pilot.move_player([0.5,0.5,0.5])
         # if player.alive == False:
             
  
             # Check if any enemies have collided with the player
-        if pygame.sprite.spritecollideany(player, enemies):
-            # If so, then remove the player and stop the loop
-            final_scores.append(player.score)
-            player.kill()
-            # player.alive = False
+        if pygame.sprite.spritecollideany(pilot, enemies):
+            # If so, then remove the pilot and stop the loop
+            final_scores.append(pilot.score)
+            pilot.kill()
+            # pilot.alive = False
             # running = False
     alive_counter.update(alive_count)   
             
     # LET THE HUMAN PLAY
-    # if pygame.sprite.spritecollideany(human_player, enemies):
-    #     # If so, then remove the player and stop the loop
-    #     human_player.kill()
+    # if pygame.sprite.spritecollideany(human_pilot, enemies):
+    #     # If so, then remove the pilot and stop the loop
+    #     human_pilot.kill()
     # Update the player sprite based on user keypresses
     player.update(pressed_keys)
     human_player.update(pressed_keys)
