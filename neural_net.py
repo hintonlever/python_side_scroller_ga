@@ -58,6 +58,30 @@ class Neural_Net():
         return(out_2)
     
     
+    def crossover(self,other_nnet):
+        
+        for i in range(1,self.weights_1.shape[1]):
+            for j in range(1,self.weights_1.shape[2]):
+                # Mutate brain only if it's less than global rate
+                if random.random() < 0.5:
+                    self.weights_1[i,j] = other_nnet.weights_1[i,j]
+
+        for i in range(1,self.weights_2.shape[1]):
+            for j in range(1,self.weights_2.shape[2]):
+                # Mutate brain only if it's less than global rate
+                if random.random() < 0.5:
+                    self.weights_2[i,j] = other_nnet.weights_1[i,j]
+                    
+        if random.random() < 0.5:
+            self.bias_1 = other_nnet.bias_1 
+            
+                    
+        if random.random() < 0.5:
+            self.bias_2 =  other_nnet.bias_2
+            
+        return(self)
+            
+    
     def mutate(self) :
         
         for i in range(1,self.weights_1.shape[1]):

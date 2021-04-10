@@ -80,7 +80,11 @@ class Pilot(pygame.sprite.Sprite):
             self.rect.bottom = self.game_height
             
             
-
+            
+    def crossover(self, other_pilot):
+        # Combine the neurons of two pilots
+        self.nnet = self.nnet.crossover(other_pilot.nnet)
+        
     def mutate(self):
         # Add random mutations to the pilot
         self.nnet.mutate()
