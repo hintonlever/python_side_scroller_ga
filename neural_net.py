@@ -58,4 +58,23 @@ class Neural_Net():
         return(out_2)
     
     
+    def mutate(self) :
+        
+        for i in range(1,self.weights_1.shape[1]):
+            for j in range(1,self.weights_1.shape[2]):
+                # Mutate brain only if it's less than global rate
+                if random.random() < 0.01:
+                    self.weights_1[i,j] = self.weights_1[i,j] + np.random.normal()
 
+        for i in range(1,self.weights_2.shape[1]):
+            for j in range(1,self.weights_2.shape[2]):
+                # Mutate brain only if it's less than global rate
+                if random.random() < 0.01:
+                    self.weights_2[i,j] = self.weights_2[i,j] + np.random.normal()
+                    
+        if random.random() < 0.01:
+            self.bias_1 = self.bias_1 + np.random.normal()
+            
+                    
+        if random.random() < 0.01:
+            self.bias_2 = self.bias_2 + np.random.normal()

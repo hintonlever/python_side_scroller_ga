@@ -78,3 +78,9 @@ class Pilot(pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom >= self.game_height:
             self.rect.bottom = self.game_height
+            
+            
+
+    def mutate(self):
+        # Add random mutations to the pilot
+        self.nnet.mutate()
