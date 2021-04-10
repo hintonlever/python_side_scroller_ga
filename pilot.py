@@ -14,10 +14,12 @@ from pygame.locals import (
 )
 
 
-class Pilot():
-    def __init__(self):
+class Pilot(pygame.sprite.Sprite):
+    def __init__(self, GAME_HEIGHT, GAME_WIDTH):
         super(Pilot, self).__init__()
         
+        self.game_height = GAME_HEIGHT
+        self.game_width = GAME_WIDTH
         
         # Using an image
         # the .convert() call optimizes the Surface, making future .blit() calls faster.
@@ -36,7 +38,7 @@ class Pilot():
                 # 300
                 
                 # Start randomly
-                random.randint(0, GAME_HEIGHT)
+                random.randint(0, self.game_height)
             )
         )
         self.alive = True
@@ -60,7 +62,7 @@ class Pilot():
         
         # Make a decision from the prediction
         # 0 is down, 1 is up
-        up_or_down = round(brain_output)
+        up_or_down = round(brain_output[0])
         
         if up_or_down == 0:
             self.rect.move_ip(0, -5)
@@ -70,9 +72,9 @@ class Pilot():
         # Keep player on the screen
         if self.rect.left < 0:
             self.rect.left = 0
-        if self.rect.right > GAME_WIDTH:
-            self.rect.right = GAME_WIDTH
+        if self.rect.right > self.game_width:
+            self.rect.right = self.game_width
         if self.rect.top <= 0:
             self.rect.top = 0
-        if self.rect.bottom >= GAME_HEIGHT:
-            self.rect.bottom = GAME_HEIGHT
+        if self.rect.bottom >= self.game_height:
+            self.rect.bottom = self.game_height

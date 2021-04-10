@@ -252,7 +252,7 @@ human_player = Player()
 
 # AI Players
 total_pilots = 10
-pilots = Population(total_pilots)
+population = population.Population(total_pilots, GAME_HEIGHT, GAME_WIDTH)
 
 
 score = Score()
@@ -266,7 +266,7 @@ enemies = pygame.sprite.Group()
 
 all_sprites = pygame.sprite.Group()
 # all_sprites.add(human_player)
-all_sprites.add(players)
+all_sprites.add(population.pilots)
 all_sprites.add(score)
 all_sprites.add(alive_counter)
 
@@ -315,11 +315,14 @@ while running:
     # LET THE AI'S PLAY
     alive_count = 0
     final_scores = []
-    for pilot in pilots:
+    for pilot in population.pilots:
         if pilot.alive == True:
             alive_count = alive_count + 1
             pilot.score = seconds
-            pilot.move_player([0.5,0.5,0.5])
+            
+            
+            
+            pilot.move_player([random.random(),random.random(),random.random()])
         # if player.alive == False:
             
  
@@ -337,8 +340,8 @@ while running:
     #     # If so, then remove the pilot and stop the loop
     #     human_pilot.kill()
     # Update the player sprite based on user keypresses
-    player.update(pressed_keys)
-    human_player.update(pressed_keys)
+    # player.update(pressed_keys)
+    # human_player.update(pressed_keys)
       
     
     # scores = 
